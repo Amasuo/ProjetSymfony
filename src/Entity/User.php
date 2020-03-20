@@ -23,6 +23,11 @@ class User implements UserInterface
     private $email;
 
     /**
+     * @ORM\Column(type="string", length=180, unique=false)
+     */
+    private $phone;
+
+    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -50,6 +55,18 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
     /**
      * A visual identifier that represents this user.
      *
@@ -72,7 +89,7 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
-    public function setRoles(array $roles): self
+    public function setRole(array $roles): self
     {
         $this->roles = $roles;
 
