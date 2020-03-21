@@ -65,7 +65,12 @@
                                 </li>
                             </ul>
                         </div>
-                        <a class="btn_2 d-none d-lg-block" href="#">MAKE AN APPOINTMENT</a>
+                        {% if app.user %}
+                          <a class="btn_2 d-none d-lg-block" >{{ app.user.username }}</a>
+                        {% endif %}
+                        {% if app.user == false %}
+                          <a class="btn_2 d-none d-lg-block" href="login" >sign in</a>
+                        {% endif %}
                     </nav>
                 </div>
             </div>
@@ -83,7 +88,7 @@
                             <h5>We are here for your care</h5>
                             <h1>Best Care &
                                 Better Doctor</h1>
-                            <a href="#" class="btn_2">Make an appointment</a>
+                            <a href="#appointmentSection" class="btn_2">Make an appointment</a>
                         </div>
                     </div>
                 </div>
@@ -351,7 +356,8 @@
     <!--::doctor_part end::-->
 
     <!--::regervation_part start::-->
-    <section class="regervation_part section_padding">
+    <a name="appointmentSection"></a>
+    <section class="regervation_part section_padding" >
         <div class="container">
             <div class="row align-items-center regervation_content">
                 <div class="col-lg-7">
