@@ -44,6 +44,14 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $role;
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $nom;
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $prenom;
 
     public function getId(): ?int
     {
@@ -73,6 +81,28 @@ class User implements UserInterface
 
         return $this;
     }
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
 
     /**
      * A visual identifier that represents this user.
@@ -81,7 +111,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->nom;
     }
 
     /**
