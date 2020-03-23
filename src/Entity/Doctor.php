@@ -27,7 +27,7 @@ class Doctor
     private $phone;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $address;
 
@@ -37,7 +37,7 @@ class Doctor
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $speciality;
 
@@ -45,6 +45,23 @@ class Doctor
      * @ORM\Column(type="blob", nullable=true)
      */
     private $img;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $b;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+
 
     public function getId(): ?int
     {
@@ -122,4 +139,42 @@ class Doctor
 
         return $this;
     }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(?string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getB(): ?bool
+    {
+        return $this->b;
+    }
+
+    public function setB(?bool $b): self
+    {
+        $this->b = $b;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+   
 }
