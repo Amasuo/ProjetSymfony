@@ -34,13 +34,13 @@
             Account Register
           </span>
           {{ form_start(registrationForm) }}
-					<div class="wrap-input100 rs1 validate-input" data-validate="Prnoom is required">
-						{{ form_widget(registrationForm.prenom) }}
+					<div class="wrap-input100 rs1 validate-input" data-validate="name is required">
+						{{ form_widget(registrationForm.name) }}
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>
-					<div class="wrap-input100 rs1 validate-input" data-validate="nom is required">
-						{{ form_widget(registrationForm.nom) }}
+					<div class="wrap-input100 rs1 validate-input" data-validate="lastname is required">
+						{{ form_widget(registrationForm.lastname) }}
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>
