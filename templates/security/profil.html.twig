@@ -66,7 +66,7 @@
                             </ul>
                         </div>
                         {% if app.user %}
-                          <a class="btn_2 d-none d-lg-block" >{{ app.user.username }}{{ app.user.lastname }}</a>
+                          <a class="btn_2 d-none d-lg-block" >{{ app.user.getlastname }} {{ app.user.getname }}</a>
                         {% endif %}
                         {% if app.user == false %}
                           <a class="btn_2 d-none d-lg-block" href="login" >sign in</a>
@@ -88,9 +88,9 @@
                             <h2>Register As a doctor</h2>
                             <div class="form-row">
                             {% if app.user %}
-                                
-                                
-                            
+
+
+
 
 
                                 <div class="form-group col-md-6">
@@ -99,15 +99,15 @@
                                 <div class="form-group col-md-6">
                                     <input type="text" class="form-control"  placeholder={{ app.user.getLastname }}>
                                 </div>
-                                
+
                                 <div class="form-group col-md-6">
                                     <input type="text" class="form-control"  placeholder={{ app.user.getEmail }}>
                                 </div>
-                            
+
                                  <div class="form-group col-md-6">
                                     <input type="text" class="form-control"  placeholder={{ app.user.getPhone }}>
                                 </div>
-                                
+
                                 {% endif %}
 
                                 <div class="form-group col-md-12">

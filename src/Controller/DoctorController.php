@@ -42,7 +42,7 @@ class DoctorController extends AbstractController
                 $authenticator,
                 'main' // firewall name in security.yaml
             );
-        
+
         }
         return $this->render('doctor/index.html.twig', [
             'form' => $form->createView(),
@@ -60,9 +60,9 @@ class DoctorController extends AbstractController
         $doctor->setName($user->getName());
         $doctor->setLastname($user->getLastname());
         $doctor->setPhone($user->getPhone());
-        $doctor->setB('false');
+        $doctor->setB(false);
         $doctor->setEmail($user->getEmail());
-       
+
         $entityManager->persist($doctor);
         $entityManager->flush();
         return new Response ('Demand sent'.$doctor->getId());
@@ -70,6 +70,6 @@ class DoctorController extends AbstractController
         //return new Response($user->getName());
     }
 
- 
+
 
 }
