@@ -69,6 +69,8 @@
                         </div>
                         {% if app.user %}
                           <a class="btn_2 d-none d-lg-block" >{{ app.user.getlastname }} {{ app.user.getname }}</a>
+
+                           
                         {% endif %}
                         {% if app.user == false %}
                           <a class="btn_2 d-none d-lg-block" href="login" >sign in</a>
@@ -90,11 +92,6 @@
                             <h2>Register As a doctor</h2>
                             <div class="form-row">
                             {% if app.user %}
-
-
-
-
-
                                 <div class="form-group col-md-6">
                                     <input type="text" class="form-control"  placeholder={{ app.user.getName }}>
                                 </div>
@@ -121,15 +118,16 @@
 {{ form_start(form) }}
 <div class="form-group">{{ form_row(form.speciality,{'attr':{'class':'form-control'}}) }}</div>
 <div class="form-group">{{ form_row(form.address,{'attr':{'class':'form-control'}}) }}</div>
+<div class="form-group">{{ form_row(form.image)}}</div>
 
 
- <div class="form-group">
+ <!--<div class="form-group">
                 <label class="col-lg-2 control-label" style="color:aliceblue"> Image</label>
                 <div class="col-lg-6" style="color:aliceblue">
-                 <input type="file" id="exampleInputFile" class="file-pos" (change)="onSelectFile($event)"  value={{ form_widget(form.image) }}  >
+                 <input type="file" id="exampleInputFile" class="file-pos" (change)="onSelectFile($event)"  value=  >
                   
                 </div>
-
+-->
 <button class="btn_2" type="submit">Validate</button>
 
 {{ form_end(form) }}
