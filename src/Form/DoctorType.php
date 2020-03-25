@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 class DoctorType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -22,7 +24,9 @@ class DoctorType extends AbstractType
             ->add('b')*/
             ->add('speciality')
             ->add('address')
-            ->add('image')
+            ->add('image',FileType::class,array(
+                'label'=>'Photo'
+            ))
         ;
     }
 
