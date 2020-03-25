@@ -7,8 +7,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Doctor;
 use App\Entity\User;
 use App\Form\DoctorType;
-
-
+use Gedmo\Sluggable\Util\Urlizer;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Security\UsersAuthenticator;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -37,6 +37,16 @@ class DoctorController extends AbstractController
         $form = $this->createForm(DoctorType::class, $doctor);
         //$form->handleRequest($request);
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $uploadedFile = $form['image']->getData();
+            $destination = $this->getParameter('kernel.project_dir').'/public/img/doctor';
+            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $newFilename = Urlizer::urlize($originalFilename).'-'.uniqid().'.'.$uploadedFile->guessExtension();
+            $uploadedFile->move(
+                $destination,
+                $newFilename
+            );
+            $doctor->setImg($newFilename);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($doctor);
             $entityManager->flush();
