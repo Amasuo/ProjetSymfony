@@ -25,9 +25,7 @@ class DoctorController extends AbstractController
      */
     public function index($id ,Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UsersAuthenticator $authenticator): Response
     {
-        $user=$this->getDoctrine()->getRepository(user::class)->find($id);
-        $entityManager=$this->getDoctrine()->getManager();
-
+        $user=$this->getDoctrine()->getRepository(User::class)->find($id);
         $doctor=new Doctor();
         $doctor->setName($user->getName());
         $doctor->setLastname($user->getLastname());
@@ -35,10 +33,11 @@ class DoctorController extends AbstractController
         $doctor->setB(false);
         $doctor->setEmail($user->getEmail());
 
-        $entityManager = $this->getDoctrine()->getManager();
+
         $form = $this->createForm(DoctorType::class, $doctor);
         //$form->handleRequest($request);
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($doctor);
             $entityManager->flush();
 
@@ -55,6 +54,6 @@ class DoctorController extends AbstractController
         return $this->render('security/RegisterAsDoctor.html.twig', [
             'form' => $form->createView(),
         ]);
-    }  
+    }
 
 }

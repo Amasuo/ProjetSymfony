@@ -32,8 +32,4 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> ec740a34e81e72b34fb327b7598ba87fd78a947e
 }
