@@ -30,7 +30,7 @@ class User implements UserInterface
     private $phone;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="json_array", nullable=true)
      */
     private $roles = [];
 
@@ -126,9 +126,15 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
-    public function setRole(array $roles): self
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+    public function addRole(string $role): self
+    {
+        array_push($this->roles,$role);
 
         return $this;
     }

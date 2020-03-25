@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Doctor;
 use App\Entity\User;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AdminController extends AbstractController
 {
@@ -51,4 +53,38 @@ class AdminController extends AbstractController
               'controller_name' => 'AdminController',
           ]);
       }
+
+      /**
+      * @Route("/becomeadmin/{id}", name="becomeadmin")
+      * @param User $user
+      */
+      public function becomeAdmin($id, Request $request){
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(User::class)->find($id);
+        $user->addRole('ROLE_ADMIN');
+        $entityManager->persist($user);
+        $entityManager->flush();
+        return $this->redirectToRoute('admintables');
+      }
+
+      /**
+      * @Route("/becomedoctor/{id}", name="becomedoctor")
+      * @param User $user
+      */
+      public function becomeDoctor($id, Request $request){
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $doctor = $entityManager->getRepository(Doctor::class)->find($id);
+        $doctor->setB(true);
+
+        $user = $entityManager->getRepository(User::class)->findOneBy(['email'=>$doctor->getEmail()]);
+        $user->addRole('ROLE_DOCTOR');
+
+        $entityManager->persist($doctor);
+        $entityManager->flush();
+        $entityManager->persist($user);
+        $entityManager->flush();
+        return $this->redirectToRoute('admintables');
+      }
+
 }
