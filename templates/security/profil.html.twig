@@ -63,14 +63,23 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact">Contact</a>
                                 </li>
+                                
+                              
                             </ul>
                         </div>
                         {% if app.user %}
-                          <a class="btn_2 d-none d-lg-block" >{{ app.user.getlastname }} {{ app.user.getname }}</a>
+                          <div><a class="btn_2 d-none d-lg-block" >{{ app.user.getlastname }} {{ app.user.getname }}</a>
+                        
+       
+              
+</div>
+                     
                         {% endif %}
                         {% if app.user == false %}
                           <a class="btn_2 d-none d-lg-block" href="login" >sign in</a>
                         {% endif %}
+
+                        
                     </nav>
                 </div>
             </div>
@@ -85,13 +94,14 @@
                 <div class="col-lg-7">
                     <div class="regervation_part_iner">
                         <form>
-                            <h2>Register As a doctor</h2>
+                            <h2>Update Profile</h2>
+          
                             <div class="form-row">
                             {% if app.user %}
 
 
 
-
+ 
 
                                 <div class="form-group col-md-6">
                                     <input type="text" class="form-control"  placeholder={{ app.user.getName }}>
@@ -128,11 +138,12 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-lg-5 col-md-6">
-                    <div class="reservation_img">
-                        <img src="img/reservation.png" alt="" class="reservation_img_iner">
-                    </div>
-                </div>
+                                   <div class="col-md-4 centered">
+               <div class="profile-pic">
+                <p><img src="{{ doctor.getImage() }}" class="img-circle"></p>
+              </div>
+            </div>
+                
             </div>
         </div>
     </section>
