@@ -69,6 +69,7 @@
                         </div>
                         {% if app.user %}
                           <div><a class="btn_2 d-none d-lg-block" >{{ app.user.getlastname }} {{ app.user.getname }}</a>
+                        <div><a class="btn_2 d-none d-lg-block" >{{ doctor.getLastname() }} {{ app.user.getname }}</a>
                         
        
               
@@ -140,7 +141,7 @@
                 </div>
                                    <div class="col-md-4 centered">
                <div class="profile-pic">
-                <p><img src="{{ doctor.getImage() }}" class="img-circle"></p>
+                <p><img src="{{ doctor.getImg() }}" class="img-circle"></p>
               </div>
             </div>
                 
