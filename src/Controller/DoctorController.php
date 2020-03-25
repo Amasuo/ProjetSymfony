@@ -20,39 +20,10 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 class DoctorController extends AbstractController
 {
     /**
-     * @Route("/doctor", name="doctor")
+     * @Route("/doctor/{id}", name="doctor")
      */
-    public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UsersAuthenticator $authenticator): Response
+    public function index($id ,Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UsersAuthenticator $authenticator): Response
     {
-        $doctor = new Doctor();
-        //$user= new User($this->getUser());
-        //$doctor->setName($user->getName());
-        $form = $this->createForm(DoctorType::class, $doctor);
-        //$form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($doctor);
-            $entityManager->flush();
-
-            // do anything else you need here, like send an email
-
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $doctor,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
-
-        }
-        return $this->render('doctor/index.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
-     /**
-     * @Route("/showuser/{id}", name="showUser")
-     */
-    public function showUser($id){
         $user=$this->getDoctrine()->getRepository(user::class)->find($id);
         $entityManager=$this->getDoctrine()->getManager();
 
@@ -63,13 +34,26 @@ class DoctorController extends AbstractController
         $doctor->setB(false);
         $doctor->setEmail($user->getEmail());
 
-        $entityManager->persist($doctor);
-        $entityManager->flush();
-        return new Response ('Demand sent'.$doctor->getId());
+        $entityManager = $this->getDoctrine()->getManager();
+        $form = $this->createForm(DoctorType::class, $doctor);
+        //$form->handleRequest($request);
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $entityManager->persist($doctor);
+            $entityManager->flush();
 
-        //return new Response($user->getName());
-    }
+            // do anything else you need here, like send an email
 
+           /* return $guardHandler->authenticateUserAndHandleSuccess(
+                $doctor,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );*/
 
+        }
+        return $this->render('security/RegisterAsDoctor.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }  
 
 }
