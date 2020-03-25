@@ -42,7 +42,7 @@ class Doctor
     private $speciality;
 
     /**
-     * @ORM\Column(type="blob", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $img;
 
@@ -176,5 +176,5 @@ class Doctor
         return $this;
     }
 
-   
+
 }

@@ -16,16 +16,16 @@ class DoctorType extends AbstractType
         $builder
            /* ->add('name')
             ->add('phone')
-            
+
             ->add('email')
-           
+
             ->add('img')
             ->add('lastname')
             ->add('b')*/
             ->add('speciality')
             ->add('address')
             ->add('image',FileType::class,array(
-                'label'=>'Photo'
+                'label'=>'Photo',
             ))
         ;
     }
