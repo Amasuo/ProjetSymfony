@@ -66,7 +66,7 @@
                             </ul>
                         </div>
                         {% if app.user %}
-                          <a href="profil" class="btn_2 d-none d-lg-block" >{{ app.user.getlastname }} {{ app.user.getname }}</a>
+                          <a href="doctor/{{ app.user.getId }}" class="btn_2 d-none d-lg-block" >{{ app.user.getlastname }} {{ app.user.getname }}</a>
                         {% endif %}
                         {% if app.user == false %}
                           <a class="btn_2 d-none d-lg-block" href="login" >sign in</a>
