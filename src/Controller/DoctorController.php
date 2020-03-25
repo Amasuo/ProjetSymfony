@@ -66,4 +66,14 @@ class DoctorController extends AbstractController
         ]);
     }
 
+  /**
+     * @Route("/finddoctor/{id}", name="doctor")
+     */
+    public function findd($id )
+    {
+        $j=$this->getDoctrine()->getRepository(doctor::class)->find($id);
+        return $this->render('security/profil.html.twig', ['doctor' =>$j,
+        ]);   
+    }
+
 }
