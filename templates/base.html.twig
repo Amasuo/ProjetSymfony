@@ -45,32 +45,40 @@
                             <ul class="navbar-nav align-items-center">
                                 <li class="nav-item active">
                                     <a class="nav-link" href="/">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="about">about</a>
-                                </li>
+                                </li>          
                                 <li class="nav-item">
                                     <a class="nav-link" href="doctors">Doctors</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="services">Services</a>
+                                    <a class="nav-link" href="appointment">Appointment</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="blog">Blog</a>
                                 </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact">Contact</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Profile
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Update Profile</a>
+                                        <a class="dropdown-item" href="doctor/{{ app.user.getId }}">Register As a Doctor</a>
+                                        
+                                    </div>
                                 </li>
-                            </ul>
+                            
                         </div>
                         {% if app.user %}
                           <a href="doctor/{{ app.user.getId }}" class="btn_2 d-none d-lg-block" >{{ app.user.getlastname }} {{ app.user.getname }}</a>
+                        
+                          
                         {% endif %}
                         {% if app.user == false %}
                           <a class="btn_2 d-none d-lg-block" href="login" >sign in</a>
                         {% endif %}
+                        
+                        </ul>
                     </nav>
                 </div>
             </div>

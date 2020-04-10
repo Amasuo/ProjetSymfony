@@ -25,15 +25,7 @@ class DoctorController extends AbstractController
      */
     public function index($id ,Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UsersAuthenticator $authenticator): Response
     {
-        $user=$this->getDoctrine()->getRepository(User::class)->find($id);
         $doctor=new Doctor();
-        $doctor->setName($user->getName());
-        $doctor->setLastname($user->getLastname());
-        $doctor->setPhone($user->getPhone());
-        $doctor->setB(false);
-        $doctor->setEmail($user->getEmail());
-
-
         $form = $this->createForm(DoctorType::class, $doctor);
         //$form->handleRequest($request);
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
@@ -45,7 +37,14 @@ class DoctorController extends AbstractController
                 $destination,
                 $newFilename
             );
+            $user=$this->getDoctrine()->getRepository(User::class)->find($id);
+
             $doctor->setImg($newFilename);
+            $doctor->setName($user->getName());
+            $doctor->setLastname($user->getLastname());
+            $doctor->setPhone($user->getPhone());
+            $doctor->setB(false);
+            $doctor->setEmail($user->getEmail());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($doctor);
@@ -59,21 +58,36 @@ class DoctorController extends AbstractController
                 $authenticator,
                 'main' // firewall name in security.yaml
             );*/
-
         }
-        return $this->render('security/RegisterAsDoctor.html.twig', [
-            'form' => $form->createView(),
-        ]);
+
+            return $this->render('RegisterAsDoctor.html.twig', [
+                'form' => $form->createView()
+            ]);
+       
+       
+      
     }
 
   /**
      * @Route("/finddoctor/{id}")
      */
-   public function findd($id )
+  /* public function findd($id )
     {
         $j=$this->getDoctrine()->getRepository(doctor::class)->find($id);
         return $this->render('security/profil.html.twig', ['doctor' =>$j
         ]);   
+    }*/
+
+     /**
+     * @Route("/test")
+     */
+    public function affich()
+    {
+        $list=$this->getDoctrine()->getRepository(Doctor::class)->findAll();
+        return $this->render('security/profil.html.twig', [
+            'list' =>$list
+        ]);
     }
+
 
 }
