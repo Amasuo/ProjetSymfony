@@ -63,24 +63,24 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact">Contact</a>
                                 </li>
-                                
-                              
+
+
                             </ul>
                         </div>
                         {% if app.user %}
                           <div><a class="btn_2 d-none d-lg-block" >{{ app.user.getlastname }} {{ app.user.getname }}</a>
                         <div><a class="btn_2 d-none d-lg-block" >{{ doctor.getLastname() }} {{ app.user.getname }}</a>
-                        
-       
-              
+
+
+
 </div>
-                     
+
                         {% endif %}
                         {% if app.user == false %}
                           <a class="btn_2 d-none d-lg-block" href="login" >sign in</a>
                         {% endif %}
 
-                        
+
                     </nav>
                 </div>
             </div>
@@ -96,13 +96,13 @@
                     <div class="regervation_part_iner">
                         <form>
                             <h2>Update Profile</h2>
-          
+
                             <div class="form-row">
                             {% if app.user %}
 
 
 
- 
+
 
                                 <div class="form-group col-md-6">
                                     <input type="text" class="form-control"  placeholder={{ app.user.getName }}>
@@ -144,7 +144,7 @@
                 <p><img src="{{ doctor.getImg() }}" class="img-circle"></p>
               </div>
             </div>
-                
+
             </div>
         </div>
     </section>

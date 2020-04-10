@@ -4,9 +4,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 class DefaultController extends AbstractController{
-  /**
+   /**
    * @Route("/", name="home")
    */
    public function home():Response{
@@ -35,10 +34,10 @@ class DefaultController extends AbstractController{
       }
 
       /**
-       * @Route("/blog", name="blog")
+       * @Route("/forum", name="forum")
        */
-       public function blog():Response{
-         return $this->render('blog.html.twig');
+       public function forum():Response{
+         return $this->render('Forum/forum.html.twig');
        }
 
        /**

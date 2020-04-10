@@ -25,18 +25,17 @@ class DoctorController extends AbstractController
      */
     public function index($id ,Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UsersAuthenticator $authenticator): Response
     {
-        $user=$this->getDoctrine()->getRepository(User::class)->find($id);
         $doctor=new Doctor();
-        $doctor->setName($user->getName());
-        $doctor->setLastname($user->getLastname());
-        $doctor->setPhone($user->getPhone());
-        $doctor->setB(false);
-        $doctor->setEmail($user->getEmail());
-
-
         $form = $this->createForm(DoctorType::class, $doctor);
         //$form->handleRequest($request);
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+          $user=$this->getDoctrine()->getRepository(User::class)->find($id);
+
+          $doctor->setName($user->getName());
+          $doctor->setLastname($user->getLastname());
+          $doctor->setPhone($user->getPhone());
+          $doctor->setB(false);
+          $doctor->setEmail($user->getEmail());
             $uploadedFile = $form['image']->getData();
             $destination = $this->getParameter('kernel.project_dir').'/public/img/doctor';
             $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -61,7 +60,7 @@ class DoctorController extends AbstractController
             );*/
 
         }
-        return $this->render('security/RegisterAsDoctor.html.twig', [
+        return $this->render('RegisterAsDoctor.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -73,7 +72,7 @@ class DoctorController extends AbstractController
     {
         $j=$this->getDoctrine()->getRepository(doctor::class)->find($id);
         return $this->render('security/profil.html.twig', ['doctor' =>$j
-        ]);   
+        ]);
     }
 
 }
