@@ -111,36 +111,22 @@
 
                             </form>
 
-                        <section>
+<section>
 
 {{ form_start(form) }}
 <div class="form-group">{{ form_row(form.speciality,{'attr':{'class':'form-control'}}) }}</div>
 <div class="form-group">{{ form_row(form.address,{'attr':{'class':'form-control'}}) }}</div>
-<div class="form-group">{{ form_row(form.image)}}</div>
-
-
- <!--<div class="form-group">
-                <label class="col-lg-2 control-label" style="color:aliceblue"> Image</label>
-                <div class="col-lg-6" style="color:aliceblue">
-                 <input type="file" id="exampleInputFile" class="file-pos" (change)="onSelectFile($event)"  value=  >
-
-                </div>
--->
+{{ form_row(form.image)}}
 <button class="btn_2" type="submit">Validate</button>
 
 {{ form_end(form) }}
 </section>
 
-
-
-
-
-
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-6">
                     <div class="reservation_img">
-                        <img src="img/reservation.png" alt="" class="reservation_img_iner">
+                        <img src="{{asset('img/reservation.png')}}" alt="" class="reservation_img_iner">
                     </div>
                 </div>
             </div>
@@ -153,14 +139,14 @@
 
     <!-- jquery plugins here-->
 
-    <script src="js/jquery-1.12.1.min.js"></script>
+    <script src="{{asset('js/jquery-1.12.1.min.js')}}"></script>
     <!-- popper js -->
-    <script src="js/popper.min.js"></script>
+    <script src="{{asset('js/popper.min.js')}}"></script>
     <!-- bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <!-- owl carousel js -->
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('js/jquery.nice-select.min.js')}}"></script>
     <!-- contact js -->
     <script src="{{asset('js/jquery.ajaxchimp.min.js')}}"></script>
     <script src="{{asset('js/jquery.form.js')}}"></script>

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DoctorRepository")
@@ -36,8 +37,9 @@ class Doctor
      */
     private $email;
 
-    /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Speciality",inversedBy="doctor")
+     * @Assert\NotBlank()
      */
     private $speciality;
 
@@ -60,6 +62,11 @@ class Doctor
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Appointment", mappedBy="doctor")
+     */
+    private $appointment;
 
 
 
@@ -116,12 +123,12 @@ class Doctor
         return $this;
     }
 
-    public function getSpeciality(): ?string
+    public function getSpeciality()
     {
         return $this->speciality;
     }
 
-    public function setSpeciality(string $speciality): self
+    public function setSpeciality($speciality): self
     {
         $this->speciality = $speciality;
 
@@ -176,5 +183,19 @@ class Doctor
         return $this;
     }
 
+    public function getAppointment(): ?string
+    {
+        return $this->appointment;
+    }
+
+    public function setAppointment(string $appointment): self
+    {
+        $this->appointment = $appointment;
+
+        return $this;
+    }
+public function __toString(){
+    return ($this->name.' '.$this->lastname);
+}
 
 }

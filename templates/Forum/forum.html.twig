@@ -64,7 +64,9 @@
                                     <a class="nav-link" href="contact">Contact</a>
                                 </li>
                             </ul>
-                        </div>
+                        </div>{% if app.user == false %}
+                          <a class="btn_2 d-none d-lg-block" href="login" >sign in</a>
+                        {% endif %}
                     </nav>
                 </div>
             </div>
@@ -91,23 +93,26 @@
 
         <!--================Blog Area =================-->
         <section class="blog_area section_padding">
-            <div class="container"><a href="forumpost/{{ app.user.getId }}" class="btn_2" >Make a subject</a>
+
+            <div class="container">{% if app.user %}<a href="{{path('forumpost', {id: app.user.id})}}" class="btn_2" >Make a subject</a>{% endif %}
                 <div class="row">
                     <div class="col-lg-8 mb-5 mb-lg-0">
                         <div class="blog_left_sidebar">
+                          {% for post in listPosts %}
+                          {% if post.type == 'forum' %}
                             <article class="blog_item">
                                 <div class="blog_details">
                                     <a class="d-inline-block" href="single-blog.html">
-                                        <h2>Google inks pact for new 35-storey office</h2>
+                                        <h2>{{ post.title }}</h2>
                                     </a>
-                                    <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                        he earth it first without heaven in place seed it second morning saying.</p>
+                                    <p>{{ post.description }}</p>
                                     <ul class="blog-info-link">
-                                        <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
+                                        <li><a href="#"><i class="far fa-comments"></i> {{ post.nbComments }} Comments</a></li>
                                     </ul>
                                 </div>
                             </article>
-
+                          {% endif %}
+                          {% endfor %}
                         </div>
                     </div>
                     <div class="col-lg-4">

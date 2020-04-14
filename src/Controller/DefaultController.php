@@ -4,6 +4,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Post;
 class DefaultController extends AbstractController{
    /**
    * @Route("/", name="home")
@@ -37,7 +38,12 @@ class DefaultController extends AbstractController{
        * @Route("/forum", name="forum")
        */
        public function forum():Response{
-         return $this->render('Forum/forum.html.twig');
+        $entityManager = $this->getDoctrine()->getManager();
+        $listPosts = $entityManager->getRepository(Post::class)->findAll();
+         return $this->render('Forum/forum.html.twig',[
+           'controller_name' => 'DefaultController',
+           'listPosts' => $listPosts
+         ]);
        }
 
        /**

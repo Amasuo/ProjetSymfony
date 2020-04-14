@@ -14,18 +14,19 @@ use Symfony\Component\HttpFoundation\Response;
 class ForumController extends AbstractController
 {
   /**
-   * @Route("/forumpost/{id}", name="forumpost")
+   * @Route("/forumpost", name="forumpost")
    */
-  public function forumPost($id,Request $request)
+  public function forumPost(Request $request)
   {
       $post = new Post();
       $form = $this->createForm(PostType::class, $post, [
-        'action' => $this->generateUrl('forumpost')
+        'action' => $this->generateUrl('forum')
       ]);
-
 
       $form->handleRequest($request);
       if($form->isSubmitted() && $form->isValid()){
+        $id = $request->attributes->get('id');
+
         $user=$this->getDoctrine()->getRepository(User::class)->find($id);
         $post->setEmailOwner($user->getEmail());
         $post->setType('forum');
@@ -34,8 +35,7 @@ class ForumController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($post);
         $entityManager->flush();
-      }
-
+        }
       return $this->render('forum/test.html.twig', [
           'form' => $form->createView()
       ]);
