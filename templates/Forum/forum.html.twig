@@ -94,7 +94,7 @@
         <!--================Blog Area =================-->
         <section class="blog_area section_padding">
 
-            <div class="container">{% if app.user %}<a href="{{path('forumpost', {id: app.user.id})}}" class="btn_2" >Make a subject</a>{% endif %}
+            <div class="container">{% if app.user %}<a href="forumpost/{{ app.user.getId }}" class="btn_2" >Make a subject</a>{% endif %}
                 <div class="row">
                     <div class="col-lg-8 mb-5 mb-lg-0">
                         <div class="blog_left_sidebar">

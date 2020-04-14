@@ -15,8 +15,13 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+        ->add('title')
+        ->add('description')
+       
+        //->add('Send', SubmitType::class)
 
-            ->add('title', TextType::class,[
+
+           /* ->add('title', TextType::class,[
               'attr' => [
                 'placeholder' => 'Title',
                 'class' => 'custom_class'
@@ -32,7 +37,7 @@ class PostType extends AbstractType
               'attr' => [
                 'class' => 'btn_2',
                 ]
-              ])
+              ])*/
         ;
     }
 
