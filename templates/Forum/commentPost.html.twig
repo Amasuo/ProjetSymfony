@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>medical</title>
+    <link rel="icon" href="{{asset('img/favicon.png')}}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="{{asset('css/animate.css')}}">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+    <!-- themify CSS -->
+    <link rel="stylesheet" href="{{asset('css/themify-icons.css')}}">
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="{{asset('css/flaticon.css')}}">
+    <!-- magnific popup CSS -->
+    <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
+    <!-- nice select CSS -->
+    <link rel="stylesheet" href="{{asset('css/nice-select.css')}}">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="{{asset('css/slick.css')}}">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+</head>
+<body>
+    <!--::header part start::-->
+    <header class="main_menu home_menu">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="/"> <img src="../img/logo.png" alt="logo"> </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse main-menu-item justify-content-center"
+                            id="navbarSupportedContent">
+                            <ul class="navbar-nav align-items-center">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="doctors">Doctors</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="appointment">Appointment</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/forum">Forum</a>
+                                </li>
+                                {% if app.user %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Profile
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Update Profile</a>
+                                        <a class="dropdown-item" href="doctor/{{ app.user.getId }}">Register As a Doctor</a>
+
+                                    </div>
+                                </li>{% endif %}
+
+                        </div>
+                        {% if app.user %}
+                          <a href="doctor/{{ app.user.getId }}" class="btn_2 d-none d-lg-block" >{{ app.user.getlastname }} {{ app.user.getname }}</a>
+
+
+                        {% endif %}
+                        {% if app.user == false %}
+                          <a class="btn_2 d-none d-lg-block" href="login" >sign in</a>
+                        {% endif %}
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header part end-->
+
+    <!-- breadcrumb start-->
+    <section class="breadcrumb_part breadcrumb_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <h2>Comment post</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
+    <section class="blog_area single-post-area section_padding">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-8 posts-list">
+               <div class="single-post">
+                  <div class="blog_details">
+                      <h2>{{ post.title }}</h2>
+                      <ul class="blog-info-link mt-3 mb-4">
+                        <li><a href="{{path('commentpost', {id: post.id})}}"><i class="far fa-comments"></i> {{ post.nbComments }} Comments</a></li>
+                      </ul>
+                      <p class="excert">
+                        {{ post.description }}
+                     </p>
+                  </div>
+               </div>
+               <div class="comments-area">
+                  <h4>{{ post.nbComments }} Comments</h4>
+                  <div class="comment-list">
+
+                  {% for comment in listComments %}
+                  {% if comment.idPost == post.id %}
+                  <div class="blog-author">
+                    <div class="media align-items-center">
+                      <div class="media-body">
+                        <h4>{{comment.name}}</h4>
+                        <p class="comment">
+                          {{comment.content}}
+                        </p>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+
+                    </div>
+                  </div>
+                  <div class="comment-form">
+                     <h4>Leave a Reply</h4>
+                     <form class="form-contact comment_form" action="#" id="commentForm">
+                    <div class="row">
+                       <div class="col-12">
+                          <div class="form-group">
+                             <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+                                placeholder="Write Comment"></textarea>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="form-group">
+                       <button type="submit" class="button btn_1 button-contactForm">Send Message</button>
+                    </div>
+                 </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+    </section>
