@@ -58,41 +58,45 @@
                         <div class="collapse navbar-collapse main-menu-item justify-content-center"
                             id="navbarSupportedContent">
                             <ul class="navbar-nav align-items-center">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="/">Home</a>
-                                </li>          
+                               <li class="nav-item active">
+                                    <a class="nav-link" href="/" style="color:white;">Home</a>
+                                </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="doctors">Doctors</a>
+                                    <a class="nav-link" href="doctors" style="color:white;">Doctors</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="appointment">Appointment</a>
+                                    <a class="nav-link" href="appointment" style="color:white;">Appointment</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="blog">Blog</a>
+                                    <a class="nav-link" href="forum" style="color:white;">Forum</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="blog" style="color:white;">Blog</a>
+                                </li>
+                                {% if app.user %}
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white;">
                                         Profile
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="#">Update Profile</a>
                                         <a class="dropdown-item" href="doctor/{{ app.user.getId }}">Register As a Doctor</a>
-                                        
+
                                     </div>
-                                </li>
-                            
+                                </li>{% endif %}
+
                         </div>
                         {% if app.user %}
                           <a href="doctor/{{ app.user.getId }}" class="btn_2 d-none d-lg-block" >{{ app.user.getlastname }} {{ app.user.getname }}</a>
-                        
-                          
+
+
                         {% endif %}
                         {% if app.user == false %}
                           <a class="btn_2 d-none d-lg-block" href="login" >sign in</a>
                         {% endif %}
-                        
+
                         </ul>
                     </nav>
                 </div>
@@ -117,7 +121,23 @@
 
 <div class="form-group">{{ form_row(form.name,{'attr':{'class':'form-control'}}) }}</div>
 <div class="form-group">{{ form_row(form.email,{'attr':{'class':'form-control'}}) }}</div>
-<div><div id="dd" style="width:80px,padding:1px">{{ form_widget(form.date)}}</div></div>
+<div><div id="dd" style="width:80px,padding:1px">{{ form_widget(form.date)}}
+<!--*****************************-->
+ <div class="form-group time_icon col-md-6">
+                                    <select class="form-control" id="Select2">
+                                        <option value="" selected>Time</option>
+                                        <option value="1">8 AM TO 10AM</option>
+                                        <option value="1">10 AM TO 12PM</option>
+                                        <option value="1">12PM TO 2PM</option>
+                                        <option value="1">2PM TO 4PM</option>
+                                        <option value="1">4PM TO 6PM</option>
+                                        <option value="1">6PM TO 8PM</option>
+                                        <option value="1">4PM TO 10PM</option>
+                                        <option value="1">10PM TO 12PM</option>
+                                    </select>
+                                </div>
+<!--****************************-->
+</div></div>
 <!--<div class="container mt-5 mb-5" style="width: 400px"><h3>Date time</h3><input type="text" id="dd" class="form-control"></div>-->
 <div class="form-group">{{ form_row(form.service,{'attr':{'class':'form-control'}}) }}</div>
 

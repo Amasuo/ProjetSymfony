@@ -43,41 +43,43 @@
                         <div class="collapse navbar-collapse main-menu-item justify-content-center"
                             id="navbarSupportedContent">
                             <ul class="navbar-nav align-items-center">
-                                <li class="nav-item active">
+                             <li class="nav-item active">
                                     <a class="nav-link" href="/">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="about">about</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="doctors">Doctors</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="services">Services</a>
+                                    <a class="nav-link" href="appointment">Appointment</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="forum">Forum</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="blog">Blog</a>
                                 </li>
+                                {% if app.user %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Profile
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Update Profile</a>
+                                        <a class="dropdown-item" href="doctor/{{ app.user.getId }}">Register As a Doctor</a>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact">Contact</a>
-                                </li>
+                                    </div>
+                                </li>{% endif %}
+
 
 
                             </ul>
                         </div>
                         {% if app.user %}
-<<<<<<< HEAD:templates/profil.html.twig
-                          <div><a class="btn_2 d-none d-lg-block" >{{ app.user.getlastname }} {{ app.user.getname }}</a>
-                        <div><a class="btn_2 d-none d-lg-block" >{{ doctor.getLastname() }} {{ app.user.getname }}</a>
-
-
-
-=======
                           <div><a class="btn_2 d-none d-lg-block" >{{ app.user.getlastname() }} {{ app.user.getName() }}</a>
                        
->>>>>>> c1a9241040529d1657ef6ec841734821bc7d1184:templates/security/profil.html.twig
+
 </div>
 
                         {% endif %}
