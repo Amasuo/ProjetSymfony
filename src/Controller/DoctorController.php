@@ -88,6 +88,20 @@ class DoctorController extends AbstractController
     {
         $list=$this->getDoctrine()->getRepository(Doctor::class)->findAll();
         return $this->render('security/profil.html.twig', [
+        return $this->render('profil.html.twig', [
+            'list' =>$list
+        ]);
+    }
+
+
+
+      /**
+     * @Route("/listdoctors")
+     */
+    public function ListDoctor()
+    {
+        $list=$this->getDoctrine()->getRepository(Doctor::class)->findAll();
+        return $this->render('doctors.html.twig', [
             'list' =>$list
         ]);
     }

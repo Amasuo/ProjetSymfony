@@ -32,6 +32,7 @@ class ForumController extends AbstractController
 
         $user=$this->getDoctrine()->getRepository(User::class)->find($id);
 
+
         $post->setEmailOwner($user->getEmail());
         $post->setType("forum");
         $post->setNbComments("0");

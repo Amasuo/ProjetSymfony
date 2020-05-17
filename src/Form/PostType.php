@@ -17,9 +17,15 @@ class PostType extends AbstractType
         $builder
         ->add('title')
         ->add('description')
+<<<<<<< HEAD
 
         //->add('Send', SubmitType::class)
 
+=======
+       
+        //->add('Send', SubmitType::class)
+
+>>>>>>> c10196715f86fe7615aff808bb314d1a0fc15a25
 
            /* ->add('title', TextType::class,[
               'attr' => [
