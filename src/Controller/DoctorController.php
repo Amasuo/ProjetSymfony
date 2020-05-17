@@ -87,7 +87,6 @@ class DoctorController extends AbstractController
     public function affich()
     {
         $list=$this->getDoctrine()->getRepository(Doctor::class)->findAll();
-        return $this->render('security/profil.html.twig', [
         return $this->render('profil.html.twig', [
             'list' =>$list
         ]);

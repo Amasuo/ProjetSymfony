@@ -8,6 +8,7 @@ use App\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\PostType;
+use App\Form\CommentType;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,10 +47,28 @@ class ForumController extends AbstractController
       ]);
   }
   /**
-   * @Route("/commentpost/{id}", name="commentpost")
+   * @Route("/commentpost/{id}/{Uid}", name="commentpost")
+   * Method( { "POST"})
    */
    public function commentPost($id,Request $request)
    {
+
+      $comment= new Comment();
+      $form = $this->createForm(CommentType::class, $comment);
+
+      if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+        $user=$this->getDoctrine()->getRepository(User::class)->find($Uid);
+
+        $comment->setIdPost($id);
+        $comment->setEmail($user->getEmail());
+        $comment->setEmail($user->getName());
+        $comment->setEmail($user->getLastname());
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($comment);
+        $entityManager->flush();
+      }
+
       $post=$this->getDoctrine()->getRepository(Post::class)->find($id);
 
       $entityManager = $this->getDoctrine()->getManager();
@@ -57,7 +76,9 @@ class ForumController extends AbstractController
 
       return $this->render('forum/commentPost.html.twig',[
         'post' => $post,
-        'listComments' => $listComments
+        'listComments' => $listComments,
+        'form'=>$form->createView()
       ]);
-   }
+
+}
 }
