@@ -25,19 +25,15 @@ class ForumController extends AbstractController
      // , [
      //   'action' => $this->generateUrl('forum')
       //]);
-
       //$form->handleRequest($request);
      // if($form->isSubmitted() && $form->isValid()){
       if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
         //$id = $request->attributes->get('id');
 
         $user=$this->getDoctrine()->getRepository(User::class)->find($id);
-
-
         $post->setEmailOwner($user->getEmail());
         $post->setType("forum");
         $post->setNbComments("0");
-
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($post);
         $entityManager->flush();
@@ -48,37 +44,44 @@ class ForumController extends AbstractController
   }
   /**
    * @Route("/commentpost/{id}/{Uid}", name="commentpost")
-   * Method( { "POST"})
+  
    */
-   public function commentPost($id,Request $request)
+   public function commentPost($id,$Uid,Request $request)
    {
 
       $comment= new Comment();
       $form = $this->createForm(CommentType::class, $comment);
+      $post=$this->getDoctrine()->getRepository(Post::class)->find($id);
+      $user=$this->getDoctrine()->getRepository(User::class)->find($Uid);
+     
 
       if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-        $user=$this->getDoctrine()->getRepository(User::class)->find($Uid);
-
         $comment->setIdPost($id);
         $comment->setEmail($user->getEmail());
-        $comment->setEmail($user->getName());
-        $comment->setEmail($user->getLastname());
-
+        $comment->setName($user->getName());
+        $comment->setLastname($user->getLastname());
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($comment);
         $entityManager->flush();
-      }
+        
+        $nb=$post->getNbComments()+1;
+        $post->setNbComments($nb);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($post);
+        $entityManager->flush();
+  
+     // $entityManager = $this->getDoctrine()->getManager();
+     // $listComments = $entityManager->getRepository(Comment::class)->findAll();
+     
 
-      $post=$this->getDoctrine()->getRepository(Post::class)->find($id);
-
-      $entityManager = $this->getDoctrine()->getManager();
-      $listComments = $entityManager->getRepository(Comment::class)->findAll();
-
+    }
+    $listComments = $this->getDoctrine()->getRepository(Comment::class)->findAll();
       return $this->render('forum/commentPost.html.twig',[
         'post' => $post,
         'listComments' => $listComments,
         'form'=>$form->createView()
       ]);
+
 
 }
 }

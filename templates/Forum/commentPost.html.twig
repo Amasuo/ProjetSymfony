@@ -111,7 +111,7 @@
                   <div class="blog_details">
                       <h2>{{ post.title }}</h2>
                       <ul class="blog-info-link mt-3 mb-4">
-                        <li><a href="{{path('commentpost', {id: post.id,Uid: app.user.getId})}}"><i class="far fa-comments"></i> {{ post.nbComments }} Comments</a></li>
+                        <li><a href="{{path('commentpost', {id: post.id, Uid:app.user.getId()})}}"><i class="far fa-comments"></i> {{ post.nbComments }} Comments</a></li>
                       </ul>
                       <p class="excert">
                         {{ post.description }}
@@ -141,15 +141,18 @@
                   </div>
                   <div class="comment-form">
                      <h4>Leave a Reply</h4>
-                     <form class="form-contact comment_form" action="#" id="commentForm">
+                    <!-- <form class="form-contact comment_form" action="#" id="commentForm">  </form>-->
                     <div class="row">
                        <div class="col-12">
                           <div class="form-group">
                             {{ form_start(form) }}
-                              {{ form_widget(form.content) }}
-                              <div class="form-group">
+                            
+                               <div class="form-group">{{ form_widget(form.content,{'attr':{'class':'form-control'}}) }}
+                              <!--</div><div class="form-group">-->
                                   <button type="submit" class="button btn_1 button-contactForm">Send Comment</button>
-                              </div>
+                                   </div>
+                                <!--<button class="btn_2" type="submit">Send Comment</button>-->
+                             
                             {{ form_end(form) }}
 
                           </div>
@@ -158,7 +161,7 @@
                     </div>
 
 
-                 </form>
+               
                   </div>
                </div>
             </div>

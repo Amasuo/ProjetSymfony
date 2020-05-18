@@ -110,7 +110,7 @@
         <!--================Blog Area =================-->
         <section class="blog_area section_padding">
 
-            <div class="container">{% if app.user %}<a href="forumpost/{{ app.user.getId }}" class="btn_2" >Make a subject</a>{% endif %}
+            <div class="container">{% if app.user %}<a href="forumpost/{{app.user.getId}}" class="btn_2" >Make a subject</a>{% endif %}
                 <div class="row">
                     <div class="col-lg-8 mb-5 mb-lg-0">
                         <div class="blog_left_sidebar">
@@ -118,12 +118,12 @@
                           {% if post.type == 'forum' %}
                             <article class="blog_item">
                                 <div class="blog_details">
-                                    <a class="d-inline-block" href="{{path('commentpost', {id: post.id, Uid: app.user.getId})}}">
+                                    <a class="d-inline-block" href="commentpost/{{post.id}}/{{app.user.getId}}">
                                         <h2>{{ post.title }}</h2>
                                     </a>
                                     <p>{{ post.description }}</p>
                                     <ul class="blog-info-link">
-                                        <li><a href="{{path('commentpost', {id: post.id,Uid: app.user.getId})}}"><i class="far fa-comments"></i> {{ post.nbComments }} Comments</a></li>
+                                        <li><a href="{{path('commentpost', {id: post.id, Uid: app.user.getId})}}"><i class="far fa-comments"></i> {{ post.nbComments }} Comments</a></li>
                                     </ul>
                                 </div>
                             </article>
