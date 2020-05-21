@@ -146,13 +146,13 @@
                        <div class="col-12">
                           <div class="form-group">
                             {{ form_start(form) }}
-                            
+
                                <div class="form-group">{{ form_widget(form.content,{'attr':{'class':'form-control'}}) }}
                               <!--</div><div class="form-group">-->
                                   <button type="submit" class="button btn_1 button-contactForm">Send Comment</button>
                                    </div>
                                 <!--<button class="btn_2" type="submit">Send Comment</button>-->
-                             
+
                             {{ form_end(form) }}
 
                           </div>
@@ -161,10 +161,45 @@
                     </div>
 
 
-               
+
                   </div>
                </div>
+               <div class="col-lg-4">
+                   <div class="blog_right_sidebar">
+                       <aside class="single_sidebar_widget search_widget">
+                           <form action="#">
+                               <div class="form-group">
+                                   <div class="input-group mb-3">
+                                       <input type="text" class="form-control" placeholder='Search Keyword'
+                                           onfocus="this.placeholder = ''"
+                                           onblur="this.placeholder = 'Search Keyword'">
+                                       <div class="input-group-append">
+                                           <button class="btn" type="button"><i class="ti-search"></i></button>
+                                       </div>
+                                   </div>
+                               </div>
+                               <button class="button rounded-0 primary-bg text-white w-100 btn_1"
+                                   type="submit">Search</button>
+                           </form>
+                       </aside>
+
+
+                       <aside class="single_sidebar_widget newsletter_widget">
+                           <h4 class="widget_title">Newsletter</h4>
+
+                           <form action="#">
+                               <div class="form-group">
+                                   <input type="email" class="form-control" onfocus="this.placeholder = ''"
+                                       onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
+                               </div>
+                               <button class="button rounded-0 primary-bg text-white w-100 btn_1"
+                                   type="submit">Subscribe</button>
+                           </form>
+                       </aside>
+                   </div>
+               </div>
             </div>
+
          </div>
       </div>
     </section>

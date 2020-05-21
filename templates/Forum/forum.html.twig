@@ -118,7 +118,7 @@
                           {% if post.type == 'forum' %}
                             <article class="blog_item">
                                 <div class="blog_details">
-                                    <a class="d-inline-block" href="commentpost/{{post.id}}/{{app.user.getId}}">
+                                    <a class="d-inline-block" href="{{path('commentpost', {id: post.id, Uid: app.user.getId})}}">
                                         <h2>{{ post.title }}</h2>
                                     </a>
                                     <p>{{ post.description }}</p>

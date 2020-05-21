@@ -5,6 +5,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Post;
+use App\Entity\Message;
+use App\Entity\User;
+use App\Form\ContactType;
 class DefaultController extends AbstractController{
    /**
    * @Route("/", name="home")
@@ -47,9 +50,27 @@ class DefaultController extends AbstractController{
        }
 
        /**
-        * @Route("/contact", name="contact")
+        * @Route("/contact/{id}", name="contact")
         */
-        public function contact():Response{
-          return $this->render('contact.html.twig');
+        public function contact($id,Request $request ):Response{
+          $message = new Message();
+          $form = $this->createForm(ContactType::class, $message);
+          $user=$this->getDoctrine()->getRepository(User::class)->find($id);
+
+          if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $message->setUserID($id);
+            $message->setHide(false);
+            $message->setName($user->getName());
+            $message->setLastname($user->getLastname());
+            $message->setToID('admin');
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($message);
+            $entityManager->flush();
+          }
+
+          return $this->render('contact.html.twig',[
+            'form'=>$form->createView()
+          ]);
         }
 }
