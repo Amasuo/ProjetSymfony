@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Post;
 use App\Entity\Message;
 use App\Entity\User;
+use App\Entity\Doctor;
 use App\Form\ContactType;
 class DefaultController extends AbstractController{
    /**
@@ -20,7 +21,10 @@ class DefaultController extends AbstractController{
     * @Route("/doctors", name="doctors")
     */
     public function doctors():Response{
-      return $this->render('doctors.html.twig');
+      $list=$this->getDoctrine()->getRepository(Doctor::class)->findAll();
+      return $this->render('doctors.html.twig', [
+          'list' =>$list
+      ]);
     }
 
     /**
@@ -70,6 +74,7 @@ class DefaultController extends AbstractController{
           }
 
           return $this->render('contact.html.twig',[
+            'controller_name' => 'DefaultController',
             'form'=>$form->createView()
           ]);
         }
