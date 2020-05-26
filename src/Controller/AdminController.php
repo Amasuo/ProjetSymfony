@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Doctor;
 use App\Entity\User;
+use App\Entity\Message;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -49,8 +50,12 @@ class AdminController extends AbstractController
       * @Route("/admininbox", name="admininbox")
       */
       public function adminInbox(){
+          $entityManager = $this->getDoctrine()->getManager();
+          $listMessages = $entityManager->getRepository(Message::class)->findAll();
+
           return $this->render('admin/inbox.html.twig', [
               'controller_name' => 'AdminController',
+              'listMessages' => $listMessages
           ]);
       }
 
@@ -87,4 +92,15 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admintables');
       }
 
+      /**
+       * @Route("/hidemessage/{id}", name="hidemessage")
+       */
+       public function hideMessage($id, Request $request){
+         $entityManager = $this->getDoctrine()->getManager();
+         $message = $entityManager->getRepository(Message::class)->find($id);
+         $message->setHide(true);
+         $entityManager->persist($message);
+         $entityManager->flush();
+         return $this->redirectToRoute('admininbox');
+       }
 }

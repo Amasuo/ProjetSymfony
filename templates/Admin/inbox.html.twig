@@ -184,7 +184,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title">Starter Page</h4>
+                        <h4 class="page-title">Inbox Page</h4>
                     </div>
                     <div class="col-7 align-self-center">
                         <div class="d-flex align-items-center justify-content-end">
@@ -214,7 +214,37 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                This is some text within a card block.
+                              <h6 class="card-title"><i class="m-r-5 font-18 mdi mdi-numeric-0-box-multiple-outline"></i> Messages</h6>
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">User </br> ID | Name | Lastname</th>
+                                        <!--<th scope="col">name</th>
+                                        <th scope="col">Lastname</th>-->
+                                        <th scope="col">Subject</th>
+                                        <th scope="col">Body</th>
+                                        <th scope="col"></th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {% for message in listMessages %}
+                                      {% if message.toID == 'admin' and message.hide==false %}
+                                        <tr>
+                                          <td>{{ message.userid }}  |   {{ message.name }}  |   {{ message.lastname }}</td>
+                                          <!--<td>{{ message.name }}</td>
+                                          <td>{{ message.lastname }}</td>-->
+                                          <td>{{ message.subject }}</td>
+                                          <td>{{ message.body }}</td>
+                                          <td>
+                                            <button class="btn btn-light"><a href="{{ path ('hidemessage', {'id' : message.id})}}">Hide</a></button>
+                                          </td>
+                                        </tr>
+                                      {% endif %}
+                                      {% endfor %}
+                                    </tbody>
+                                  </table>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -47,31 +47,48 @@
                                     <a class="nav-link" href="/">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about">about</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="doctors">Doctors</a>
+                                    <a class="nav-link" href="listdoctors">Doctors</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" href="services">Services</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="blog">Blog</a>
+                                    <a class="nav-link" href="forum">Forum</a>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact">Contact</a>
-                                </li>
-                            </ul>
+                                {% if app.user %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Profile
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Update Profile</a>
+                                        <a class="dropdown-item" href="doctor/{{ app.user.getId }}">Register As a Doctor</a>
+
+                                    </div>
+                                </li>{% endif %}
+
                         </div>
+                        {% if app.user %}
+                          {% if 'ROLE_ADMIN' in app.user.getRoles %}
+                            <a href="admin" class="btn_2 d-none d-lg-block" >{{ app.user.getlastname }} {{ app.user.getname }}</a>
+                          {% else %}
+                            <a href="/" class="btn_2 d-none d-lg-block" >{{ app.user.getlastname }} {{ app.user.getname }}</a>
+                          {% endif %}
+                        {% endif %}
+                        {% if app.user == false %}
+                          <a class="btn_2 d-none d-lg-block" href="login" >sign in</a>
+                        {% endif %}
+
+                        </ul>
                     </nav>
                 </div>
             </div>
         </div>
     </header>
     <!-- Header part end-->
-
     <!-- breadcrumb start-->
     <section class="breadcrumb_part breadcrumb_bg">
         <div class="container">

@@ -13,6 +13,8 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 
 
 
@@ -21,7 +23,11 @@ class AppointmentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', TextType::class, [
+              'attr' => [
+                'placeholder' => 'Name'
+              ]
+            ])
             ->add('email')
             ->add('date', DateTimeType::class, [
                 'placeholder' => [
@@ -48,15 +54,15 @@ class AppointmentType extends AbstractType
                         'class' => 'App\Entity\Doctor',
                         'placeholder'   => 'Select Doctor',
                         'choices' => $form->getData()->getDoctor()
-                     
+
                     ]);
                 }
                 )
                 //->add('Send', SubmitType::class)
-                ;     
-        
+                ;
+
     }
-  
+
 
     public function configureOptions(OptionsResolver $resolver)
     {

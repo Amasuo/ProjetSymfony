@@ -221,6 +221,7 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
+                                                <th scope="col">ID</th>
                                                 <th scope="col">name</th>
                                                 <th scope="col">Lastname</th>
                                                 <th scope="col">Email</th>
@@ -233,6 +234,7 @@
                                           {% for user in listUsers %}
                                           {% if 'ROLE_ADMIN' in user.getRoles == false %}
                                             <tr>
+                                                <td>{{ user.id }}</td>
                                                 <td>{{ user.name }}</td>
                                                 <td>{{ user.lastname }}</td>
                                                 <td>{{ user.email }}</td>
