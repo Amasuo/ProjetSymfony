@@ -5,19 +5,33 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Post;
+use App\Entity\Message;
+use App\Entity\User;
+use App\Entity\Doctor;
+use App\Form\ContactType;
 class DefaultController extends AbstractController{
    /**
    * @Route("/", name="home")
    */
    public function home():Response{
-     return $this->render('base.html.twig');
+    $entityManager = $this->getDoctrine()->getManager();
+    $listUsers = $entityManager->getRepository(User::class)->findAll();
+    $listDoctors = $entityManager->getRepository(Doctor::class)->findAll();
+     return $this->render('base.html.twig',[
+      'listUsers' => $listUsers,
+      'listDoctors' => $listDoctors
+      
+  ]);
    }
 
    /**
     * @Route("/doctors", name="doctors")
     */
     public function doctors():Response{
-      return $this->render('doctors.html.twig');
+      $list=$this->getDoctrine()->getRepository(Doctor::class)->findAll();
+      return $this->render('doctors.html.twig', [
+          'list' =>$list
+      ]);
     }
 
     /**
@@ -47,9 +61,28 @@ class DefaultController extends AbstractController{
        }
 
        /**
-        * @Route("/contact", name="contact")
+        * @Route("/contact/{id}", name="contact")
         */
-        public function contact():Response{
-          return $this->render('contact.html.twig');
+        public function contact($id,Request $request ):Response{
+          $message = new Message();
+          $form = $this->createForm(ContactType::class, $message);
+          $user=$this->getDoctrine()->getRepository(User::class)->find($id);
+
+          if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $message->setUserID($id);
+            $message->setHide(false);
+            $message->setName($user->getName());
+            $message->setLastname($user->getLastname());
+            $message->setToID('admin');
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($message);
+            $entityManager->flush();
+          }
+
+          return $this->render('contact.html.twig',[
+            'controller_name' => 'DefaultController',
+            'form'=>$form->createView()
+          ]);
         }
 }

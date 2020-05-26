@@ -43,4 +43,18 @@ class AppointmentController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/listApp/{id}")
+     */
+    public function ListAppointment($id)
+    {
+        $list=$this->getDoctrine()->getRepository(Appointment::class)->findBy(
+            ['doctor'=>$id],['date'=>'asc']
+        );
+        return $this->render('listeAppointment.html.twig', [
+            'list' =>$list//->createQueryBuilder('p')
+                        //->orderBy('p.date', 'asc')
+        ]);
+    }
+
 }
