@@ -58,7 +58,7 @@
                                 </li>
 
 
-				
+                                    {% if app.user %}
                                     {% if 'ROLE_DOCTOR' in app.user.getRoles %}
                                     {% for d in listDoctors %}
                                      {% if d.name==app.user.getname and d.lastname==app.user.getlastname%}
@@ -69,6 +69,7 @@
                                 {% endfor %}
                                     {% endif %}
                                 
+                                {% endif %}
 
                                 {% if app.user %}
                                 <li class="nav-item dropdown">
@@ -128,12 +129,14 @@
      <!--================Blog Area =================-->
         <section class="blog_area section_padding">
                  <!--if doctor**************************-->
+                  {% if app.user %}
                  {% if 'ROLE_DOCTOR' in app.user.getRoles %}
                                     {% for d in listDoctors %}
                                      {% if d.name==app.user.getname and d.lastname==app.user.getlastname%}
             <div class="container">{% if app.user %}<a href="blogpost/{{app.user.getId}}" class="btn_2" >Make post</a>{% endif %}
                  {% endif %}
                                 {% endfor %}
+                                    {% endif %}
                                     {% endif %}
                 <!--End if doctor**************************-->
                
@@ -153,7 +156,9 @@
                     <div class="about_us_text">
                         <h2>{{ post.title }}</h2>
                         <p>{{ post.description}}</p>
+                        {% if app.user %}
                        <a class="btn_2 " href="{{path('commentpost', {id: post.id, Uid: app.user.getId})}}">learn more</a>
+                        {% endif %}
                          <!--<div class="banner_item">
                             <div class="single_item">
                                 <img src="img/icon/banner_1.svg" alt="">
