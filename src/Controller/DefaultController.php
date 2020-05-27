@@ -17,9 +17,11 @@ class DefaultController extends AbstractController{
     $entityManager = $this->getDoctrine()->getManager();
     $listUsers = $entityManager->getRepository(User::class)->findAll();
     $listDoctors = $entityManager->getRepository(Doctor::class)->findAll();
+    $listPosts = $entityManager->getRepository(Post::class)->findBy(['type'=>'blog']);
      return $this->render('base.html.twig',[
       'listUsers' => $listUsers,
-      'listDoctors' => $listDoctors
+      'listDoctors' => $listDoctors,
+      'listPosts' => $listPosts
       
   ]);
    }
