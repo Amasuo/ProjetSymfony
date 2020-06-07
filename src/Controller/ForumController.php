@@ -20,6 +20,7 @@ class ForumController extends AbstractController
    */
   public function forumPost($id,Request $request)
   {
+      // création d'un nouveau Post
       $post = new Post();
       $form = $this->createForm(PostType::class, $post);
      // , [
@@ -34,6 +35,8 @@ class ForumController extends AbstractController
         $post->setEmailOwner($user->getEmail());
         $post->setType("forum");
         $post->setNbComments("0");
+
+        //ajout dans la BD
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($post);
         $entityManager->flush();
@@ -44,7 +47,7 @@ class ForumController extends AbstractController
   }
   /**
    * @Route("/commentpost/{id}/{Uid}", name="commentpost")
-  
+
    */
    public function commentPost($id,$Uid,Request $request)
    {
@@ -53,26 +56,29 @@ class ForumController extends AbstractController
       $form = $this->createForm(CommentType::class, $comment);
       $post=$this->getDoctrine()->getRepository(Post::class)->find($id);
       $user=$this->getDoctrine()->getRepository(User::class)->find($Uid);
-     
 
+      // lorsque le formulaire est rempli
       if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
         $comment->setIdPost($id);
         $comment->setEmail($user->getEmail());
         $comment->setName($user->getName());
         $comment->setLastname($user->getLastname());
+
+        // ajout du commentaire dans la BD
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($comment);
         $entityManager->flush();
-        
+
+        // incrémentation du nbre de commentaires pour ce Post
         $nb=$post->getNbComments()+1;
         $post->setNbComments($nb);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($post);
         $entityManager->flush();
-  
+
      // $entityManager = $this->getDoctrine()->getManager();
      // $listComments = $entityManager->getRepository(Comment::class)->findAll();
-     
+
 
     }
     $listComments = $this->getDoctrine()->getRepository(Comment::class)->findAll();

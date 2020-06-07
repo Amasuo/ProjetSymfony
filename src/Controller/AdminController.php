@@ -35,6 +35,7 @@ class AdminController extends AbstractController
       * @Route("/admintables", name="admintables")
       */
       public function adminTables(){
+        // affichage des tables de la BD
           $entityManager = $this->getDoctrine()->getManager();
           $listUsers = $entityManager->getRepository(User::class)->findAll();
           $listDoctors = $entityManager->getRepository(Doctor::class)->findAll();
@@ -50,6 +51,7 @@ class AdminController extends AbstractController
       * @Route("/admininbox", name="admininbox")
       */
       public function adminInbox(){
+        // affichage des messages envoyés à partir de 'Contact'
           $entityManager = $this->getDoctrine()->getManager();
           $listMessages = $entityManager->getRepository(Message::class)->findAll();
 
@@ -64,6 +66,7 @@ class AdminController extends AbstractController
       * @param User $user
       */
       public function becomeAdmin($id, Request $request){
+        // pour donner le privilège 'ADMIN' à un utilisateur
         $entityManager = $this->getDoctrine()->getManager();
         $user = $entityManager->getRepository(User::class)->find($id);
         $user->addRole('ROLE_ADMIN');
@@ -77,6 +80,7 @@ class AdminController extends AbstractController
       * @param User $user
       */
       public function becomeDoctor($id, Request $request){
+        // pour donner le privilège 'DOCTOR' à un utilisateur
         $entityManager = $this->getDoctrine()->getManager();
 
         $doctor = $entityManager->getRepository(Doctor::class)->find($id);
@@ -85,6 +89,7 @@ class AdminController extends AbstractController
         $user = $entityManager->getRepository(User::class)->findOneBy(['email'=>$doctor->getEmail()]);
         $user->addRole('ROLE_DOCTOR');
 
+        //ajouter les modifications dans la BD
         $entityManager->persist($doctor);
         $entityManager->flush();
         $entityManager->persist($user);
@@ -96,6 +101,7 @@ class AdminController extends AbstractController
        * @Route("/hidemessage/{id}", name="hidemessage")
        */
        public function hideMessage($id, Request $request){
+         // pour ne plus afficher un message déja lu (dans admininbox)
          $entityManager = $this->getDoctrine()->getManager();
          $message = $entityManager->getRepository(Message::class)->find($id);
          $message->setHide(true);

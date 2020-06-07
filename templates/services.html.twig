@@ -118,22 +118,17 @@
                 </div>
                 <div class="row justify-content-between align-items-center">
                     <div class="col-lg-3 col-sm-12">
+                      {% for i in 0..(list|length/2)-1 %}
                         <div class="single_feature">
+                          <a href ="/services/search/{{list[i].name}}" class="x">
                             <div class="single_feature_part">
-                                <span class="single_feature_icon"><img src="img/icon/feature_1.svg" alt=""></span>
-                                <h4>Better Future</h4>
-                                <p>Darkness multiply rule Which from without life creature blessed
-                                    give moveth moveth seas make day which divided our have.</p>
+                                <span class="single_feature_icon"><img src="img/Speciality/{{list[i].img}}" alt=""></span>
+                                <h4>{{ list[i].name }}</h4>
+                                <p>{{ list[i].description }}</p>
                             </div>
+                          </a>
                         </div>
-                        <div class="single_feature">
-                            <div class="single_feature_part">
-                                <span class="single_feature_icon"><img src="img/icon/feature_2.svg" alt=""></span>
-                                <h4>Better Future</h4>
-                                <p>Darkness multiply rule Which from without life creature blessed
-                                    give moveth moveth seas make day which divided our have.</p>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                     <div class="col-lg-4 col-sm-12">
                             <div class="single_feature_img">
@@ -141,22 +136,17 @@
                             </div>
                     </div>
                     <div class="col-lg-3 col-sm-12">
+                      {% for i in (list|length/2)..list|length-1 %}
                         <div class="single_feature">
+                          <a href ="/services/search/{{list[i].name}}" class="x">
                             <div class="single_feature_part">
-                                <span class="single_feature_icon"><img src="img/icon/feature_1.svg" alt=""></span>
-                                <h4>Better Future</h4>
-                                <p>Darkness multiply rule Which from without life creature blessed
-                                    give moveth moveth seas make day which divided our have.</p>
+                                <span class="single_feature_icon"><img src="img/Speciality/{{list[i].img}}" alt=""></span>
+                                <h4>{{ list[i].name }}</h4>
+                                <p>{{ list[i].description }}</p>
                             </div>
+                          </a>
                         </div>
-                        <div class="single_feature">
-                            <div class="single_feature_part">
-                                <span class="single_feature_icon"><img src="img/icon/feature_2.svg" alt=""></span>
-                                <h4>Better Future</h4>
-                                <p>Darkness multiply rule Which from without life creature blessed
-                                    give moveth moveth seas make day which divided our have.</p>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -169,11 +159,45 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-8">
                         <div class="section_tittle text-center">
-                            <h2> Experienced Doctors</h2>
-                            <p>Face replenish sea good winged bearing years air divide wasHave night male also</p>
+                            <h2>Doctors</h2>
+                            <p>List of our doctors, choose the Speciality to see the doctors that belong to </p>
                         </div>
+                        <!--<form>
+                          <div class="input-group mb-3">
+                            <select class="form-control" id="Select" >
+                              {% for item in list  %}
+                                <option value="/services/search/{{item.name}}"><a href="/services/search/{{item.name}}" class="x">{{item.name}}</a></option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </form>-->
+                          <!--{{ form_start(form) }}
+                            <div class="form-group">
+                              <div class="input-group mb-3">
+                                {{ form_widget(form.speciality) }}
+                              </div>
+                              <div class="input-group-append">
+                                {{ form_widget(form.search) }}
+                              </div>
+                            </div>
+                          {{ form_end(form) }}-->
+
+
+                        <!--<form action="">
+                          <div class="form-group">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder='Search Keyword'
+                                    onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Search Keyword'">
+                                <div class="input-group-append">
+                                  <button class="btn" type="submit"><i class="ti-search"></i></button>
+                                </div>
+                            </div>
+                          </div>
+                        </form>-->
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-sm-6 col-lg-3">
                         <div class="single_blog_item">
@@ -259,9 +283,14 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+
         </section>
+
+
+
         <!--::doctor_part end::-->
 
 
@@ -352,5 +381,36 @@
             <script src="{{asset('js/contact.js')}}"></script>
             <!-- custom js -->
             <script src="{{asset('js/custom.js')}}"></script>
+
+
+            <!--
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            <script>
+            function onClickOption(event){
+              event.preventDefault();
+              const url = this.href;
+              axios.get(url).then(function(response){
+                const data = response.data.listDoctors;
+
+              })
+            }
+            var options = document.querySelectorAll('a.x');
+            options.forEach(function(link){
+              link.addEventListener('click',onClickOption)
+            })
+          </script>-->
+            <!--<script>
+              function onClickOption(event){
+                event.preventDefault();
+                const url = this.href;
+                axios.get(url).then(function(response){
+                  console.log(response);
+                })
+              }
+
+              document.querySelectorAll('option').foreach(function(link){
+                link.addEventListener('click',onClickOption)
+              })
+            </script>-->
         </body>
         </html>

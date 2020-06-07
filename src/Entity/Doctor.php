@@ -183,7 +183,7 @@ class Doctor
         return $this;
     }
 
-    public function getAppointment(): ?string
+    /*public function getAppointment(): ?string
     {
         return $this->appointment;
     }
@@ -193,7 +193,7 @@ class Doctor
         $this->appointment = $appointment;
 
         return $this;
-    }
+    }*/
 public function __toString(){
     return ($this->name.' '.$this->lastname);
 }

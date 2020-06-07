@@ -31,11 +31,14 @@ class DoctorController extends AbstractController
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
           $user=$this->getDoctrine()->getRepository(User::class)->find($id);
 
+          // création d'un docteur à partir de ses infos déja existantes dans la BD (table user) + nouveau données
           $doctor->setName($user->getName());
           $doctor->setLastname($user->getLastname());
           $doctor->setPhone($user->getPhone());
           $doctor->setB(false);
           $doctor->setEmail($user->getEmail());
+
+          //upload fichier (image)
             $uploadedFile = $form['image']->getData();
             $destination = $this->getParameter('kernel.project_dir').'/public/img/doctor';
             $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -53,6 +56,7 @@ class DoctorController extends AbstractController
             $doctor->setB(false);
             $doctor->setEmail($user->getEmail());
 
+            //ajout dans la BD
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($doctor);
             $entityManager->flush();
@@ -81,24 +85,14 @@ class DoctorController extends AbstractController
         ]);
     }*/
 
-     /**
-     * @Route("/test")
-     */
-    public function affich()
-    {
-        $list=$this->getDoctrine()->getRepository(Doctor::class)->findAll();
-        return $this->render('profil.html.twig', [
-            'list' =>$list
-        ]);
-    }
-
-
 
       /**
      * @Route("/listdoctors")
      */
     public function ListDoctor()
     {
+      // affichage des docteurs
+      
         $list=$this->getDoctrine()->getRepository(Doctor::class)->findAll();
         return $this->render('doctors.html.twig', [
             'list' =>$list

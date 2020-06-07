@@ -17,7 +17,9 @@ class AppointmentController extends AbstractController
      * @Route("/appointment", name="appointment")
      */
     public function index(Request $request): Response
-    {   $appointment=new Appointment();
+    {
+      // Création d'un rendez-vous
+      $appointment=new Appointment();
         $form = $this->createForm(AppointmentType::class, $appointment);
         $form->handleRequest($request);
 
@@ -33,6 +35,8 @@ class AppointmentController extends AbstractController
         }*/
         if ($form->isSubmitted() && $form->isValid()) {
            // if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+           // ajout à la BD
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($appointment);
             $entityManager->flush();
@@ -48,6 +52,7 @@ class AppointmentController extends AbstractController
      */
     public function ListAppointment($id)
     {
+      // affichage de la liste des rendez-vous pour un docteur
         $list=$this->getDoctrine()->getRepository(Appointment::class)->findBy(
             ['doctor'=>$id],['date'=>'asc']
         );
